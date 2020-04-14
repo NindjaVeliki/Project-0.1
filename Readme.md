@@ -1,6 +1,6 @@
 # Calculator
 
-This program a is CLI based calculator for _basic_ arithmetic.
+This program is a CLI based calculator for _basic_ arithmetic.
 
 ## Examples
 
