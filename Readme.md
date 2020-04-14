@@ -3,9 +3,10 @@ A basic calculator
 
 ## Examples
 ```
-// Addition
-$ java Calc 2 + 2
-4
+> java Calc
+Enter an integer: 4
+Enter an operator: *
+Enter an integer: 4
 ```
 
 ## Build
