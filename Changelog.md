@@ -1,4 +1,6 @@
 # Changelog
+## Version 0.0.3
+- Working Multiplication operation
 
 ## Version 0.0.2
 ### Added

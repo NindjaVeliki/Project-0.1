@@ -8,7 +8,7 @@ class Calc {
             System.out.println(a + b);
         } else if (operator.equals("-")) {
             System.out.println(a - b);
-        } else if (operator.equals("*")) {
+        } else if (operator.equals("x")) {
             System.out.println(a * b);
         } else if (operator.equals("/")) {
             System.out.println(a / b);
