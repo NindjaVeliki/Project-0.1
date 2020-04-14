@@ -13,4 +13,4 @@ Enter an integer: 4
 >./build.sh
 
 ## Usage
->java Calc [operand] [operator] [operand]
+>java Calc
