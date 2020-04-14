@@ -1,6 +1,6 @@
 # Changelog
 ## Version 0.0.3
-- Working Multiplication operation
+- Working Multiplication operation; use "x" instead
 
 ## Version 0.0.2
 ### Added
