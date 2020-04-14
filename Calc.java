@@ -6,6 +6,12 @@ class Calc {
 
         if (operator.equals("+")) {
             System.out.println(a + b);
+        } else if (operator.equals("-")) {
+            System.out.println(a - b);
+        } else if (operator.equals("*")) {
+            System.out.println(a * b);
+        } else if (operator.equals("/")) {
+            System.out.println(a / b);
         }
     }
 }
