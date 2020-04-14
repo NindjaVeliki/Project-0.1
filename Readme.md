@@ -1,7 +1,15 @@
 # Calculator
-Expected Input:
->java Calc 2 + 2
+A basic calculator
 
-Expected Output:
->4
+## Examples
+```
+// Addition
+$ java Calc 2 + 2
+4
+```
 
+## Build
+>./build.sh
+
+## Usage
+>java Calc [operand] [operator] [operand]
