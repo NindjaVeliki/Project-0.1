@@ -39,5 +39,3 @@ The program is CLI based calculator for _basic_ arithmetic.
 ## Usage
 
 > java Calc [subcommmand][operand] [operand]
-
-a change
