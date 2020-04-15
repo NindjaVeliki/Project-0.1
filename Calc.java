@@ -37,19 +37,19 @@ class Calc {
         double output = 0.0;
 
         switch (operation.subcommand) {
-            case "add":
+            case "+":
                 output = operation.a + operation.b;
                 break;
-            case "sub":
+            case "-":
                 output = operation.a - operation.b;
                 break;
-            case "mul":
+            case "*":
                 output = operation.a * operation.b;
                 break;
-            case "div":
+            case "/":
                 output = operation.a / operation.b;
                 break;
-            case "mod":
+            case "%":
                 output = operation.a % operation.b;
                 break;
             default:
@@ -60,8 +60,19 @@ class Calc {
 
     public static void main(String[] args) {
         // Parse input: 1) parse subcommand, 2) parse operands
+        System.out.println("Please enter 1st operand:");
+        String a = System.console().readLine();
+
+        System.out.println("Please enter operator");
+        String op = System.console().readLine();
+
+        System.out.println("Please enter 2nd operand:");
+        String b = System.console().readLine();
+
+        String[] inputs = {op, a, b};
+
         Calc calc = new Calc();
-        Operation operation = calc.parse(args);
+        Operation operation = calc.parse(inputs);
         calc.calculate(operation);
     }
 }
