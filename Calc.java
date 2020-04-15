@@ -32,27 +32,40 @@ class Calc {
         return operation;
     }
 
+    public double decide(Operation operation){
+        // Select operation
+        double output = 0.0;
+        switch(operation.subcommand){
+            case ("add"): 
+            // Perform operation
+            output = operation.a + operation.b;
+            break;
+            case ("sub"):
+            output = operation.a - operation.b;
+            break;
+            case ("mul"):
+            output = operation.a * operation.b;
+            break;
+            case ("div"):
+            output = operation.a / operation.b;
+            break;
+            default:
+            System.out.println("Unrecognized");
+            break;
+      }
+
+        return output;
+
+    }
+
     public static void main(String[] args) {
         // Parse input: 1) parse subcommand, 2) parse operands        
         Calc calc = new Calc();
         Operation operation = calc.parse(args);
 
-        // Select operation
-        double output = 0.0;
-        if (operation.subcommand.equals("add")) {
-            // Perform operation
-            output = operation.a + operation.b;
-        } else if (operation.subcommand.equals("sub")) {
-            output = operation.a - operation.b;
-        } else if (operation.subcommand.equals("mul")) {
-            output = operation.a * operation.b;
-        } else if (operation.subcommand.equals("div")) {
-            output = operation.a / operation.b;
-        } else {
-            System.out.println("Unrecognized");
-        }
+
 
         // Output
-        System.out.println(output);
+        System.out.println(calc.decide(operation));
     }
 }
