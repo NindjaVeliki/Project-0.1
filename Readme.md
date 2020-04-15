@@ -4,19 +4,19 @@ A basic calculator
 ## Examples
 ```
 // Addition
-$ java Calc add 2 2
+$ java -cp bin com.github.mehrabrahman.calc.Calc add 2 2
 4.0
 
 // Subtraction
-$ java Calc sub 4 2
+$ java -cp bin com.github.mehrabrahman.calc.Calc sub 4 2
 2.0
 
 // Multiplication
-$ java Calc mul 2 3
+$ java -cp bin com.github.mehrabrahman.calc.Calc mul 2 3
 6.0
 
 // Division
-$ java Calc div 6 2
+$ java -cp bin com.github.mehrabrahman.calc.Calc div 6 2
 3.0
 ```
 

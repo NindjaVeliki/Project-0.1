@@ -1,18 +1,8 @@
+package com.github.mehrabrahman.calc;
+
+import com.github.mehrabrahman.calc.math.Operation;
+
 class Calc {
-    class Operation {
-        String subcommand;
-        double a;
-        double b;
-
-        Operation(String subcommand, double a, double b) {
-            this.subcommand = subcommand;
-            this.a = a;
-            this.b = b;
-        }
-
-        Operation() {}
-    }
-
     public Operation parse(String[] args) {
         Operation operation = new Operation();
         String subcommand = "";
