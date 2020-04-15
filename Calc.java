@@ -1,17 +1,4 @@
 class Calc {
-    class Operation {
-        String subcommand;
-        double a;
-        double b;
-
-        Operation(String subcommand, double a, double b) {
-            this.subcommand = subcommand;
-            this.a = a;
-            this.b = b;
-        }
-
-        Operation() {}
-    }
 
     public Operation parse(String[] args) {
         Operation operation = new Operation();
@@ -32,22 +19,50 @@ class Calc {
         return operation;
     }
 
+    public double add(Double a, Double b){
+        //Operation operation = new Operation();
+        double output = 0.0;
+        output = a + b;
+        return output;
+    }
+
+    public double sub(Double a, Double b){
+        //Operation operation = new Operation();
+        double output = 0.0;
+        output = a - b;
+        return output;
+    }
+
+    public double mul(Double a, Double b){
+        //Operation operation = new Operation();
+        double output = 0.0;
+        output = a * b;
+        return output;
+    }
+
+    public double div(Double a, Double b){
+        //Operation operation = new Operation();
+        double output = 0.0;
+        output = a / b;
+        return output;
+    }
+
     public static void main(String[] args) {
         // Parse input: 1) parse subcommand, 2) parse operands        
         Calc calc = new Calc();
         Operation operation = calc.parse(args);
-
+        
         // Select operation
         double output = 0.0;
         if (operation.subcommand.equals("add")) {
             // Perform operation
-            output = operation.a + operation.b;
+          output = calc.add(operation.a, operation.b);
         } else if (operation.subcommand.equals("sub")) {
-            output = operation.a - operation.b;
+            output = calc.sub(operation.a, operation.b);
         } else if (operation.subcommand.equals("mul")) {
-            output = operation.a * operation.b;
+            output = calc.mul(operation.a, operation.b);
         } else if (operation.subcommand.equals("div")) {
-            output = operation.a / operation.b;
+            output = calc.div(operation.a, operation.b);
         } else {
             System.out.println("Unrecognized");
         }
