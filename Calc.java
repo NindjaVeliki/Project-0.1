@@ -1,6 +1,20 @@
 class Calc {
-    public static void main(String[] args) {
-        // Parse input: 1) parse subcommand, 2) parse operands
+    class Operation {
+        String subcommand;
+        double a;
+        double b;
+
+        Operation(String subcommand, double a, double b) {
+            this.subcommand = subcommand;
+            this.a = a;
+            this.b = b;
+        }
+
+        Operation() {}
+    }
+
+    public Operation parse(String[] args) {
+        Operation operation = new Operation();
         String subcommand = "";
         double a = 0.0;
         double b = 0.0;
@@ -9,29 +23,33 @@ class Calc {
             try {
                 a = Double.parseDouble(args[1]);
                 b = Double.parseDouble(args[2]);
+                operation = new Operation(subcommand, a, b);
             } catch (NumberFormatException e) {
                 System.out.println("Numbers only!");
                 System.exit(1);
             }
         }
+        return operation;
+    }
+
+    public static void main(String[] args) {
+        // Parse input: 1) parse subcommand, 2) parse operands        
+        Calc calc = new Calc();
+        Operation operation = calc.parse(args);
 
         // Select operation
         double output = 0.0;
-        if (subcommand.equals("add")) {
+        if (operation.subcommand.equals("add")) {
             // Perform operation
-            output = a + b;
-        }
-
-        if (subcommand.equals("sub")) {
-            output = a - b;
-        }
-
-        if (subcommand.equals("mul")) {
-            output = a * b;
-        }
-
-        if (subcommand.equals("div")) {
-            output = a / b;
+            output = operation.a + operation.b;
+        } else if (operation.subcommand.equals("sub")) {
+            output = operation.a - operation.b;
+        } else if (operation.subcommand.equals("mul")) {
+            output = operation.a * operation.b;
+        } else if (operation.subcommand.equals("div")) {
+            output = operation.a / operation.b;
+        } else {
+            System.out.println("Unrecognized");
         }
 
         // Output
