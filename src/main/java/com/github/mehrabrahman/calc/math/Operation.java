@@ -25,6 +25,10 @@ public class Operation {
         }
     }
 
+    public double getOutput() {
+        return this.output;
+    }
+
     private double output() {
         switch (subcommand) {
             case "add":
