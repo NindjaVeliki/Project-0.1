@@ -20,7 +20,7 @@ public class Operation {
                 this.output = this.output();
             } catch (NumberFormatException e) {
                 System.out.println("Numbers only!");
-                System.exit(1);
+                System.exit(0);
             }
         }
     }
@@ -46,6 +46,6 @@ public class Operation {
 
     @Override
     public String toString() {
-        return this.a + " + " + this.b + " = " + this.output;
+        return this.a + " " + this.subcommand +" " + this.b + " = " + this.output;
     }
 }
