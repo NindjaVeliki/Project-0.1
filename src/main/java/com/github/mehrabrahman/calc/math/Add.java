@@ -9,7 +9,7 @@ package com.github.mehrabrahman.calc.math;
  */
 public class Add extends Operation {
 	
-	public Add(String[] args) {
+	public Add(String ...args) {
 		super(args);
 	}
 

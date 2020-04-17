@@ -1,7 +1,19 @@
 package com.github.mehrabrahman.calc.math;
 
 public class OperationFactory {
-	public static Outputtable getOperation(String[] args) {
+	private static OperationFactory instance;
+
+	private OperationFactory() {
+	}
+
+	public static OperationFactory getInstance() {
+		if (instance == null) {
+			instance = new OperationFactory();
+		}
+		return instance;
+	}
+
+	public Outputtable getOperation(String[] args) {
 		String subcommand = args[0];
 		switch (subcommand) {
 		case "add":

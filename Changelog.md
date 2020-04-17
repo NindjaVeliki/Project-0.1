@@ -1,7 +1,11 @@
 # Changelog
 
 ## Version 0.5.0
+### Changed
 - Refactoring math package, main Calc with inheritance/abstraction patterns
+
+### Removed
+- Build script
 
 ## Version 0.4.0
 ### Changed

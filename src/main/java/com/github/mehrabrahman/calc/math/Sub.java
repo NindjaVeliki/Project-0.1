@@ -7,7 +7,7 @@ package com.github.mehrabrahman.calc.math;
  * @author Mehrab
  *
  */
-public class Sub extends Operation {
+public final class Sub extends Operation {
 
 	public Sub(String[] args) {
 		super(args);
