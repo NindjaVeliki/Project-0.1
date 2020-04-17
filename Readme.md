@@ -1,27 +1,27 @@
 # Calculator
 A basic calculator
 
+## Build
+>mvn clean compile
+
+## Usage
+>mvn exec:java -Dexec.args="[subcommmand] [operand] [operand]"
+
 ## Examples
 ```
 // Addition
-$ java -cp bin com.github.mehrabrahman.calc.Calc add 2 2
+$ mvn exec:java -Dexec.args="add 2 2"
 4.0
 
 // Subtraction
-$ java -cp bin com.github.mehrabrahman.calc.Calc sub 4 2
+$ mvn exec:java -Dexec.args="sub 4 2"
 2.0
 
 // Multiplication
-$ java -cp bin com.github.mehrabrahman.calc.Calc mul 2 3
+$ mvn exec:java -Dexec.args="mul 2 3"
 6.0
 
 // Division
-$ java -cp bin com.github.mehrabrahman.calc.Calc div 6 2
+$ mvn exec:java -Dexec.args="div 6 2"
 3.0
 ```
-
-## Build
->./build.sh
-
-## Usage
->java Calc [subcommmand] [operand] [operand]
