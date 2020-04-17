@@ -5,15 +5,15 @@ This class holds data for an operation.
 @author Mehrab
 @version 0.1.0
 */
-public class Operation {
-    private String subcommand;
-    private double a;
-    private double b;
-    private double output;
+public abstract class Operation implements Outputtable {
+    protected double a;
+    protected double b;
+    protected double output;
+    
+    public Operation() {}
 
     public Operation(String[] args) {
         if (args.length > 0) {
-            this.subcommand = args[0];
             try {
                 this.a = Double.parseDouble(args[1]);
                 this.b = Double.parseDouble(args[2]);
@@ -27,25 +27,5 @@ public class Operation {
 
     public double getOutput() {
         return this.output;
-    }
-
-    private double output() {
-        switch (subcommand) {
-            case "add":
-                return this.a + this.b;
-            case "sub":
-                return this.a - this.b;
-            case "mul":
-                return this.a * this.b;
-            case "div":
-                return this.a / this.b;
-            default:
-                return 0.0;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return this.a + " + " + this.b + " = " + this.output;
     }
 }
