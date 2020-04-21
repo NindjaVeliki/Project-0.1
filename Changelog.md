@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.6.0
+### Added
+- Dockerfile and schema.sql for database integration
+
+### Changed
+- Readme.md updated with design notes
+- pom.xml updated with executable jar plugin configuration
+
 ## Version 0.5.0
 ### Changed
 - Refactoring math package, main Calc with inheritance/abstraction patterns
