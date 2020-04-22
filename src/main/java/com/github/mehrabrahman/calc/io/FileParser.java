@@ -8,22 +8,22 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.github.mehrabrahman.calc.math.Add;
 import com.github.mehrabrahman.calc.math.Operation;
-import com.github.mehrabrahman.calc.math.Outputtable;
+import com.github.mehrabrahman.calc.math.OperationFactory;
 
 public class FileParser implements Dao<Operation> {
-	static File history = new File("history.txt");
+	static final File input = new File("input.csv");
+	static final File output = new File("output.csv");
 	
 	private void write(Operation operation) {
 		// Print to file
-		try (FileWriter fw = new FileWriter(history, true);
+		try (FileWriter fw = new FileWriter(output, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter pw = new PrintWriter(bw);) {
-
-			pw.println(operation.toString());
+			pw.println(operation);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,11 +31,13 @@ public class FileParser implements Dao<Operation> {
 
 	private List<Operation> read() {
 		// Read from file
-		try (FileReader in = new FileReader(history); BufferedReader br = new BufferedReader(in);) {
+		List<Operation> result = new ArrayList<>(); 
+		try (FileReader in = new FileReader(input); BufferedReader br = new BufferedReader(in);) {
 			String line = br.readLine();
+			OperationFactory factory = OperationFactory.getInstance();
 			while (line != null) {
-				System.out.println(line);
-				operations.add(new Add("add", "2", "2"));
+				String[] args = line.split(",");
+				result.add(factory.getOperation(args));
 				line = br.readLine();
 			}
 		} catch (FileNotFoundException e) {
@@ -43,6 +45,7 @@ public class FileParser implements Dao<Operation> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 
 	@Override

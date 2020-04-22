@@ -1,5 +1,7 @@
 create table operations (
-    int integer primary key,
+    id integer primary key,
     operation varchar,
+    operandA decimal,
+    operandB decimal,
     result decimal
 )

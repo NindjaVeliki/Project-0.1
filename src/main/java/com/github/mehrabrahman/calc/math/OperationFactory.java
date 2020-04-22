@@ -13,7 +13,7 @@ public class OperationFactory {
 		return instance;
 	}
 
-	public Outputtable getOperation(String[] args) {
+	public Operation getOperation(String[] args) {
 		String subcommand = args[0];
 		switch (subcommand) {
 		case "add":

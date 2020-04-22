@@ -17,10 +17,4 @@ public final class Sub extends Operation {
 	public double output() {
 		return this.a - this.b;
 	}
-	
-	@Override
-	public String toString() {
-		return this.a + " - " + this.b + " = " + this.output;
-	}
-
 }
