@@ -2,6 +2,7 @@ package com.github.mehrabrahman.calc.io;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +16,12 @@ public class OperationRepository implements Dao<Operation> {
 
 	@Override
 	public void insert(Operation e) {
-		// TODO Auto-generated method stub
-
+		try(Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/opsdb", "opsdb", "opsdb");) {
+			PreparedStatement stmt = conn.prepareStatement("insert into operations(operation, operandA, operandB, result) values(?, ?, ?, ?)");
+			// stmt.setString(x,y);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

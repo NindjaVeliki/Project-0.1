@@ -1,5 +1,5 @@
 create table operations (
-    id integer primary key,
+    id serial primary key,
     operation varchar,
     operandA decimal,
     operandB decimal,
