@@ -14,10 +14,10 @@ import com.github.mehrabrahman.calc.math.Add;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.Outputtable;
 
-public class FileParser {
+public class FileParser implements Dao<Operation> {
 	static File history = new File("history.txt");
 	
-	public static void write(Outputtable operation) {
+	private void write(Operation operation) {
 		// Print to file
 		try (FileWriter fw = new FileWriter(history, true);
 				BufferedWriter bw = new BufferedWriter(fw);
@@ -29,7 +29,7 @@ public class FileParser {
 		}
 	}
 
-	public static void read(List<Outputtable> operations) {
+	private List<Operation> read() {
 		// Read from file
 		try (FileReader in = new FileReader(history); BufferedReader br = new BufferedReader(in);) {
 			String line = br.readLine();
@@ -43,6 +43,16 @@ public class FileParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void insert(Operation operation) {
+		write(operation);		
+	}
+
+	@Override
+	public List<Operation> readAll() {
+		return read();
 	}
 
 }

@@ -24,8 +24,4 @@ public abstract class Operation implements Outputtable {
             }
         }
     }
-
-    public double getOutput() {
-        return this.output;
-    }
 }

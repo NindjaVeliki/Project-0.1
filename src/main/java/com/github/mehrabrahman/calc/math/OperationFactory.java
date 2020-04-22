@@ -25,7 +25,7 @@ public class OperationFactory {
 		case "div":
 			return new Div(args);
 		default:
-			return null;
+			throw new IllegalArgumentException("Operation not recognized");
 		}
 	}
 }

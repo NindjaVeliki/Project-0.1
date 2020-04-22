@@ -20,7 +20,7 @@ public final class Sub extends Operation {
 	
 	@Override
 	public String toString() {
-		return this.a + " - " + this.b + " = " + getOutput();
+		return this.a + " - " + this.b + " = " + this.output;
 	}
 
 }
