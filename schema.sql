@@ -1,6 +1,6 @@
 create table operations (
     id serial primary key,
-    operation varchar,
+    operator varchar,
     operands varchar,
     result decimal
 )
