@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.github.mehrabrahman.calc.math;
 
 /**
@@ -8,14 +5,14 @@ package com.github.mehrabrahman.calc.math;
  *
  */
 public class Add extends Operation {
-	
-	public Add(String ...args) {
-		super(args);
+	public Add(String operator, String sOperands) {
+		super(operator, sOperands);
 	}
 
 	@Override
-	public double output() {
-		return this.a + this.b;
+	public void calculate() {
+		for (int i = 0; i < operands.length; i++) {
+			result += operands[i];
+		}
 	}
-
 }

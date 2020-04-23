@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.github.mehrabrahman.calc.math;
 
 /**
@@ -8,13 +5,15 @@ package com.github.mehrabrahman.calc.math;
  *
  */
 public class Mul extends Operation {
-	
-	public Mul(String ...args) {
-		super(args);
+	public Mul(String operator, String sOperands) {
+		super(operator, sOperands);
 	}
 
 	@Override
-	public double output() {
-		return this.a * this.b;
+	public void calculate() {
+		result = operands[0];
+		for (int i = 1; i < operands.length; i++) {
+			result *= operands[i];
+		}
 	}
 }

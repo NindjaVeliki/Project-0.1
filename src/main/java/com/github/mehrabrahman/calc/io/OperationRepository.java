@@ -1,7 +1,6 @@
 package com.github.mehrabrahman.calc.io;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,36 +12,53 @@ import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
 
 public class OperationRepository implements Dao<Operation> {
+	private List<Operation> cache;
+
+	public OperationRepository() {
+		cache = new ArrayList<>();
+	}
 
 	@Override
-	public void insert(Operation e) {
-		try(Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/opsdb", "opsdb", "opsdb");) {
-			PreparedStatement stmt = conn.prepareStatement("insert into operations(operation, operandA, operandB, result) values(?, ?, ?, ?)");
-			// stmt.setString(x,y);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void insertAll(List<Operation> operations) {
+		String sql = "insert into operations(operator, operands, result) values(?, ?, ?)";
+		try(Connection connection = DataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);) {
+			for (Operation operation : operations) {
+				statement.setString(1, operation.getOperator());
+				statement.setString(2, operation.getSOperands());
+				statement.setDouble(3, operation.getResult());
+				statement.addBatch();
+			}
+			statement.executeBatch();
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
 		}
 	}
 
 	@Override
 	public List<Operation> readAll() {
-		List<Operation> result = new ArrayList<>();
-		try(Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/opsdb", "opsdb", "opsdb");) {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from operations");
-			while (rs.next()) {
-				Operation temp;
-				String[] args = new String[4];
-				args[0] = rs.getString("operation");
-				args[1] = rs.getString("operandA");
-				args[2] = rs.getString("operandB");
-				temp = OperationFactory.getInstance().getOperation(args);
-				result.add(temp);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+		if (cache.isEmpty()) {
+			OperationFactory factory = OperationFactory.getInstance();
+			String sql = "select * from operations";
 
+			try(Connection connection = DataSource.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery(sql);) {
+				while (rs.next()) {
+					Operation operation;
+					String operator = rs.getString("operator");
+					String sOperands = rs.getString("operands");
+					double result = rs.getDouble("result");
+					operation = factory.getOperation(operator, sOperands);
+					operation.setResult(result);
+					cache.add(operation);
+				}
+			} catch (SQLException ex) {
+				System.err.println(ex.getMessage());
+			}
+			return cache;
+		} else {
+			return cache;
+		}
+	}
 }

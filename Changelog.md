@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.0.0
+### Changed
+- Complete refactoring of packages and main
+
 ## Version 0.6.0
 ### Added
 - Dockerfile and schema.sql for database integration

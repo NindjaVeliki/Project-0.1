@@ -12,26 +12,7 @@ docker run --name opsdb -d --rm -p 5432:5432 opsdb
 ```
 
 ## Usage
->mvn exec:java -Dexec.args="[subcommmand] [operand] [operand]"
-
-## Examples
-```
-// Addition
-$ mvn exec:java -Dexec.args="add 2 2"
-4.0
-
-// Subtraction
-$ mvn exec:java -Dexec.args="sub 4 2"
-2.0
-
-// Multiplication
-$ mvn exec:java -Dexec.args="mul 2 3"
-6.0
-
-// Division
-$ mvn exec:java -Dexec.args="div 6 2"
-3.0
-```
+>java -jar target/*.jar [subcommmand],"[operand] [operand]"
 
 ## Design
 ### Architecture

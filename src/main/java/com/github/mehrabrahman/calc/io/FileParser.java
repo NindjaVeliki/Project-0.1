@@ -1,11 +1,9 @@
 package com.github.mehrabrahman.calc.io;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,47 +13,47 @@ import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
 
 public class FileParser implements Dao<Operation> {
-	static final File input = new File("input.csv");
-	static final File output = new File("output.csv");
-	
-	private void write(Operation operation) {
-		// Print to file
-		try (FileWriter fw = new FileWriter(output, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				PrintWriter pw = new PrintWriter(bw);) {
-			pw.println(operation);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	private File input;
+	private File output;
 
-	private List<Operation> read() {
-		// Read from file
-		List<Operation> result = new ArrayList<>(); 
-		try (FileReader in = new FileReader(input); BufferedReader br = new BufferedReader(in);) {
-			String line = br.readLine();
-			OperationFactory factory = OperationFactory.getInstance();
-			while (line != null) {
-				String[] args = line.split(",");
-				result.add(factory.getOperation(args));
-				line = br.readLine();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
+	public FileParser(String input, String output) {
+		this.input = new File(input);
+		this.output = new File(output);
 	}
 
 	@Override
-	public void insert(Operation operation) {
-		write(operation);		
+	public void insertAll(List<Operation> operations) {
+		try (PrintWriter pw = new PrintWriter(output)) {
+			for (Operation operation : operations) {
+				pw.println(operation);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public List<Operation> readAll() {
-		return read();
-	}
+		List<Operation> operations = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+			OperationFactory factory = OperationFactory.getInstance();
+			String line = br.readLine();
+			while (line != null) {
+				String[] tokens = line.split(",");
+				String operator = tokens[0];
+				String sOperands = tokens[1];
+				operations.add(factory.getOperation(operator, sOperands));
+				line = br.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("input file not found");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		return operations;
+	}
+	
+	public void write() {
+	}
 }

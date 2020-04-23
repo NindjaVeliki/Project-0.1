@@ -5,72 +5,69 @@ This class holds data for an operation.
 @author Mehrab
 @version 0.1.0
 */
-public abstract class Operation implements Outputtable {
+public abstract class Operation implements Calculatable {
 	protected int id;
-	protected String operation;
-    protected double a;
-    protected double b;
-    protected double output;
-    
-    public Operation() {}
+	protected String operator;
+	protected String sOperands;
+	protected double[] operands;
+	protected double result;
+	
+	public Operation(String operator, String sOperands) {
+		this.operator = operator;
+		this.sOperands = sOperands;
+		parse();
+	}
 
-    public Operation(String[] args) {
-        if (args.length > 0) {
-            try {
-            	this.operation = args[0];
-                this.a = Double.parseDouble(args[1]);
-                this.b = Double.parseDouble(args[2]);
-                this.output = this.output();
-            } catch (NumberFormatException e) {
-                System.out.println("Numbers only!");
-                System.exit(1);
-            }
-        }
-    }
-    
-    @Override
-    public String toString() {
-    	return this.operation + "," + this.a + "," + this.b + "," + this.output;
-    }
+	public Operation(int id, String operator, String sOperands, double result) {
+		this.id = id;
+		this.operator = operator;
+		this.sOperands = sOperands;
+		this.result = result;
+		parse();
+	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(a);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(b);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + id;
-		result = prime * result + ((operation == null) ? 0 : operation.hashCode());
-		temp = Double.doubleToLongBits(output);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+	private void parse() {
+		String[] tokens = sOperands.split(" ");
+		this.operands = new double[tokens.length];
+		for(int i = 0; i < tokens.length; i++) {
+			try {
+				operands[i] = Double.parseDouble(tokens[i]);
+			} catch (NumberFormatException ex) {
+				System.err.println("Unable to parse operand: " + tokens[i]);
+			}
+		}
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public String getSOperands() {
+		return sOperands;
+	}
+
+	public double getResult() {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Operation other = (Operation) obj;
-		if (Double.doubleToLongBits(a) != Double.doubleToLongBits(other.a))
-			return false;
-		if (Double.doubleToLongBits(b) != Double.doubleToLongBits(other.b))
-			return false;
-		if (operation == null) {
-			if (other.operation != null)
-				return false;
-		} else if (!operation.equals(other.operation))
-			return false;
-		if (Double.doubleToLongBits(output) != Double.doubleToLongBits(other.output))
-			return false;
-		return true;
+	public void setResult(double result) {
+		this.result = result;
 	}
     
-    
+    @Override
+    public String toString() {
+		StringBuilder out = new StringBuilder();
+		out.append(this.id);
+		out.append(",");
+		out.append(this.operator);
+		out.append(",");
+		out.append(this.sOperands);
+		out.append(",");
+		out.append(this.result);
+    	return out.toString();
+    }
 }
