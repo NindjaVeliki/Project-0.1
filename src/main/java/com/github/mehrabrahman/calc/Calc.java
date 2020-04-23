@@ -9,24 +9,28 @@ import com.github.mehrabrahman.calc.math.OperationFactory;
 
 class Calc {
 	public static void main(String[] args) {
-		final String input = System.getProperty("input", "input.csv");
-		final String output = System.getProperty("output", "output.csv");
-
 		if (args != null) {
-			if (args[0].equalsIgnoreCase("parse")) {
-				FileParser fParser = new FileParser(input, output);
+			// Parse input from file and insert into sql database
+			if (args[0].equals("parse")) {
+				FileParser fParser = new FileParser(args[1]);
 				List<Operation> operations = fParser.readAll();
+
+				// Calculate on all operations loaded from input file
 				for(Operation o : operations) {
 					o.calculate();
 				}
 
+				// Insert operations into database
 				OperationRepository oRepository = new OperationRepository();
 				oRepository.insertAll(operations);
-				
+
+				// Read all operations from database
+				operations = oRepository.readAll();				
 				for(Operation o : operations) {
 					System.out.println(o);
-				}				
+				}
 			} else {
+				// Single operation mode - no file or database required
 				String operator = args[0];
 				String sOperands = args[1];
 				OperationFactory factory = OperationFactory.getInstance();
@@ -35,7 +39,10 @@ class Calc {
 				System.out.println(operation.getResult());
 			} 
 		} else {
-			System.out.println("Usage: calc [operation] [operand] [operand]");
+			// Help output
+			System.out.println("Usage:");
+			System.out.println("	calc parse [file.csv]");
+			System.out.println("	calc [operation] [operand] [operand]");
 		}
 	}
 }

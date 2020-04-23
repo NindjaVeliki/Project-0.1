@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,23 +13,13 @@ import com.github.mehrabrahman.calc.math.OperationFactory;
 
 public class FileParser implements Dao<Operation> {
 	private File input;
-	private File output;
 
-	public FileParser(String input, String output) {
+	public FileParser(String input) {
 		this.input = new File(input);
-		this.output = new File(output);
 	}
 
 	@Override
-	public void insertAll(List<Operation> operations) {
-		try (PrintWriter pw = new PrintWriter(output)) {
-			for (Operation operation : operations) {
-				pw.println(operation);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public void insertAll(List<Operation> operations) {}
 
 	@Override
 	public List<Operation> readAll() {
@@ -52,8 +41,5 @@ public class FileParser implements Dao<Operation> {
 		}
 
 		return operations;
-	}
-	
-	public void write() {
 	}
 }
