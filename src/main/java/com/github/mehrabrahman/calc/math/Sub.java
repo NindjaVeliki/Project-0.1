@@ -10,10 +10,12 @@ public class Sub extends Operation {
 	}
 
 	@Override
-	public void calculate() {
-		result = operands[0];
-		for (int i = 1; i < operands.length; i++) {
-			result -= operands[i];
+	public double calculate() {
+		this.result = this.operands[0];
+		for (int i = 1; i < this.operands.length; i++) {
+			this.result -= this.operands[i];
 		}
+
+		return this.result;
 	}
 }

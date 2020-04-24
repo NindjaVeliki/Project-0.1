@@ -10,9 +10,11 @@ public class Add extends Operation {
 	}
 
 	@Override
-	public void calculate() {
-		for (int i = 0; i < operands.length; i++) {
-			result += operands[i];
+	public double calculate() {
+		for (int i = 0; i < this.operands.length; i++) {
+			this.result += this.operands[i];
 		}
+
+		return this.result;
 	}
 }

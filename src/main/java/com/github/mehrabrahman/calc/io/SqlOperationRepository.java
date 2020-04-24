@@ -11,18 +11,20 @@ import java.util.List;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
 
-public class OperationRepository implements Dao<Operation> {
+public class SqlOperationRepository implements Dao<Operation> {
+	private SqlDataSource dataSource;
 	private List<Operation> cache;
 
-	public OperationRepository() {
+	public SqlOperationRepository(SqlDataSource dataSource) {
+		this.dataSource = dataSource;
 		cache = new ArrayList<>();
 	}
 
 	@Override
 	public void insertAll(List<Operation> operations) {
 		String sql = "insert into operations(operator, operands, result) values(?, ?, ?)";
-		try(Connection connection = DataSource.getConnection();
-		PreparedStatement statement = connection.prepareStatement(sql);) {
+		try (Connection connection = this.dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
 			for (Operation operation : operations) {
 				statement.setString(1, operation.getOperator());
 				statement.setString(2, operation.getSOperands());
@@ -41,9 +43,9 @@ public class OperationRepository implements Dao<Operation> {
 			OperationFactory factory = OperationFactory.getInstance();
 			String sql = "select * from operations";
 
-			try(Connection connection = DataSource.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery(sql);) {
+			try (Connection connection = this.dataSource.getConnection();
+					Statement statement = connection.createStatement();
+					ResultSet rs = statement.executeQuery(sql);) {
 				while (rs.next()) {
 					Operation operation;
 					String operator = rs.getString("operator");

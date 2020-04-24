@@ -11,15 +11,16 @@ import java.util.List;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
 
-public class FileParser implements Dao<Operation> {
+public class FileOperationRepository implements Dao<Operation> {
 	private File input;
 
-	public FileParser(String input) {
+	public FileOperationRepository(String input) {
 		this.input = new File(input);
 	}
 
 	@Override
-	public void insertAll(List<Operation> operations) {}
+	public void insertAll(List<Operation> operations) {
+	}
 
 	@Override
 	public List<Operation> readAll() {

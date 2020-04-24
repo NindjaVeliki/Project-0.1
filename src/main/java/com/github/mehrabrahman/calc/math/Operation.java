@@ -1,17 +1,18 @@
 package com.github.mehrabrahman.calc.math;
 
 /**
-This class holds data for an operation.
-@author Mehrab
-@version 0.1.0
-*/
+ * This class holds data for an operation.
+ * 
+ * @author Mehrab
+ * @version 0.1.0
+ */
 public abstract class Operation implements Calculatable {
 	protected int id;
 	protected String operator;
 	protected String sOperands;
 	protected double[] operands;
 	protected double result;
-	
+
 	public Operation(String operator, String sOperands) {
 		this.operator = operator;
 		this.sOperands = sOperands;
@@ -29,7 +30,7 @@ public abstract class Operation implements Calculatable {
 	private void parse() {
 		String[] tokens = sOperands.split(" ");
 		this.operands = new double[tokens.length];
-		for(int i = 0; i < tokens.length; i++) {
+		for (int i = 0; i < tokens.length; i++) {
 			try {
 				operands[i] = Double.parseDouble(tokens[i]);
 			} catch (NumberFormatException ex) {
@@ -57,9 +58,9 @@ public abstract class Operation implements Calculatable {
 	public void setResult(double result) {
 		this.result = result;
 	}
-    
-    @Override
-    public String toString() {
+
+	@Override
+	public String toString() {
 		StringBuilder out = new StringBuilder();
 		out.append(this.id);
 		out.append(",");
@@ -68,6 +69,6 @@ public abstract class Operation implements Calculatable {
 		out.append(this.sOperands);
 		out.append(",");
 		out.append(this.result);
-    	return out.toString();
-    }
+		return out.toString();
+	}
 }
