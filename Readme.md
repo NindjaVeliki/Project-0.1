@@ -22,9 +22,9 @@ docker run --name opsdb -d --rm -p 5432:5432 opsdb
 ### Architecture
 - Calc is a command line application
 - The math package defines an Operation abstract class, Calculatable interface, and several math subtypes
-- The io.FileParser class reads a csv file into a List of Operations
-- The io.DataSource creates Connection objects for OperationRepository
-- OperationRepository inserts and selects data from a sql database
+- The io.FileOperationRepository class reads a csv file into a List of Operations
+- The io.SqlDataSource creates Connection objects for SqlOperationRepository
+- SqlOperationRepository inserts and selects data from a sql database
 
 ### Main algorithm
 - The main class parses args, and if they exist

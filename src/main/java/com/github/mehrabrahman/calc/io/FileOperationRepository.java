@@ -14,8 +14,8 @@ import com.github.mehrabrahman.calc.math.OperationFactory;
 public class FileOperationRepository implements Dao<Operation> {
 	private File input;
 
-	public FileOperationRepository(String input) {
-		this.input = new File(input);
+	public FileOperationRepository(File input) {
+		this.input = input;
 	}
 
 	@Override

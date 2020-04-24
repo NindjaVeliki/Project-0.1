@@ -1,5 +1,6 @@
 package com.github.mehrabrahman.calc;
 
+import java.io.File;
 import java.util.List;
 
 import com.github.mehrabrahman.calc.io.Dao;
@@ -8,6 +9,7 @@ import com.github.mehrabrahman.calc.io.SqlDataSource;
 import com.github.mehrabrahman.calc.io.SqlOperationRepository;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
+import com.github.mehrabrahman.calc.server.HttpServer;
 
 /**
  * Calc is a basic calculator that reads one or more basic operations,
@@ -19,9 +21,15 @@ import com.github.mehrabrahman.calc.math.OperationFactory;
 class Calc {
 	public static void main(String[] args) {
 		if (args != null) {
+			if (args[0].equals("server")) {
+				HttpServer server = new HttpServer();
+				server.listen();
+			}
+			
 			// Parse input from file and insert into sql database
-			if (args[0].equals("parse")) {
-				Dao<Operation> fileParser = new FileOperationRepository(args[1]);
+			else if (args[0].equals("parse")) {
+				File input = new File(args[1]);
+				Dao<Operation> fileParser = new FileOperationRepository(input);
 				List<Operation> operations = fileParser.readAll();
 
 				// Calculate on all operations loaded from input file
