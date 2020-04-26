@@ -10,6 +10,7 @@ import com.github.mehrabrahman.calc.io.SqlOperationRepository;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
 import com.github.mehrabrahman.calc.server.HttpServer;
+import com.github.mehrabrahman.calc.server.SocketServer;
 
 /**
  * Calc is a basic calculator that reads one or more basic operations,
@@ -22,7 +23,7 @@ class Calc {
 	public static void main(String[] args) {
 		if (args != null) {
 			if (args[0].equals("server")) {
-				HttpServer server = new HttpServer();
+				SocketServer server = new SocketServer();
 				server.listen();
 			}
 			
