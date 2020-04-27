@@ -9,7 +9,6 @@ import com.github.mehrabrahman.calc.io.SqlDataSource;
 import com.github.mehrabrahman.calc.io.SqlOperationRepository;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
-import com.github.mehrabrahman.calc.server.HttpServer;
 import com.github.mehrabrahman.calc.server.SocketServer;
 
 /**
