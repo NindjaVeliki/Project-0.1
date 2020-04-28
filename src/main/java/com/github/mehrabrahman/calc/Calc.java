@@ -9,6 +9,7 @@ import com.github.mehrabrahman.calc.io.SqlDataSource;
 import com.github.mehrabrahman.calc.io.SqlOperationRepository;
 import com.github.mehrabrahman.calc.math.Operation;
 import com.github.mehrabrahman.calc.math.OperationFactory;
+import com.github.mehrabrahman.calc.server.HttpServer;
 import com.github.mehrabrahman.calc.server.SocketServer;
 
 /**
@@ -23,6 +24,12 @@ class Calc {
 		if (args != null) {
 			if (args[0].equals("server")) {
 				SocketServer server = new SocketServer();
+				server.listen();
+			}
+			
+			else if (args[0].equals("http")) {
+				HttpServer server = new HttpServer();
+				System.out.println("Running http server on port 8080");
 				server.listen();
 			}
 			
